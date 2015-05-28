@@ -1,1 +1,1 @@
-include ':app', ':opengl_lesson_1'
+include ':app', ':opengl_lesson_1', ':opengl_lesson_2'
