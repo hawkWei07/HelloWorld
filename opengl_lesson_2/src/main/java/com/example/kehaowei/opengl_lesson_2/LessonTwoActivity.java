@@ -1,6 +1,10 @@
 package com.example.kehaowei.opengl_lesson_2;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.pm.ConfigurationInfo;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,10 +12,34 @@ import android.view.MenuItem;
 
 public class LessonTwoActivity extends Activity {
 
+    private GLSurfaceView mGLSurfceView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lesson_two);
+        mGLSurfceView = new GLSurfaceView(this);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        final ConfigurationInfo info = activityManager.getDeviceConfigurationInfo();
+        final boolean supportEs2 = info.reqGlEsVersion >= 0x2000;
+        if (supportEs2) {
+            mGLSurfceView.setEGLContextClientVersion(2);
+            mGLSurfceView.setRenderer(new LessonTwoRenderer());
+        } else {
+            return;
+        }
+        setContentView(mGLSurfceView);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGLSurfceView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mGLSurfceView.onPause();
     }
 
     @Override

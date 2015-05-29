@@ -9,6 +9,9 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by kehaowei on 15/5/29.
  */
 public class LessonTwoRenderer implements GLSurfaceView.Renderer {
+    public LessonTwoRenderer() {
+    }
+
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
 
